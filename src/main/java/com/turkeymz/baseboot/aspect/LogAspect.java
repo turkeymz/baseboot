@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 
 
 @Aspect
@@ -47,6 +48,15 @@ public class LogAspect {
         logger.info("响应参数:{}",apiResultBody.toString());
         logger.info("耗时: {} ms",stopWatch.getTotalTimeMillis());
 
+    }
+    // 异常切面逻辑
+    @AfterThrowing(value = "logPointCut()", throwing = "exception")
+    public void doAfterThrowing(Exception exception) {
+        stopWatch.stop();
+        // 保存异常日志记录
+        logger.info("请求异常: {}",  exception.getMessage());
+        logger.info("发生异常时间: {}", LocalDateTime.now());
+        logger.info("耗时: {} ms",stopWatch.getTotalTimeMillis());
     }
 
     private String getParams(JoinPoint joinPoint,MethodSignature signature){

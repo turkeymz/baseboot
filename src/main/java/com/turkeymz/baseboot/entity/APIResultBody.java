@@ -69,4 +69,13 @@ public class APIResultBody {
         rb.setResult(null);
         return rb;
     }
+
+    @Override
+    public String toString() {
+        return "APIResultBody {" +
+                "code='" + code + '\'' +
+                ", message='" + message + '\'' +
+                ", result=" + result +
+                '}';
+    }
 }

@@ -2,15 +2,15 @@ package com.turkeymz.baseboot.annotation;
 
 import java.lang.annotation.*;
 
+/*
+ * 日志配置类注解，下面参数为了以后扩展暂定，非必须
+ */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface AutoLog {
-
     /**
      * 日志内容
-     *
-     * @return
      */
     String value() default "";
 

@@ -4,8 +4,6 @@ import com.turkeymz.baseboot.annotation.AutoLog;
 import com.turkeymz.baseboot.entity.APIResultBody;
 import com.turkeymz.baseboot.exception.SysException;
 import com.turkeymz.baseboot.exception.code.HttpExceptionCode;
-import com.turkeymz.baseboot.util.SpringContextUtil;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -27,14 +25,13 @@ public class BaseController {
     @GetMapping("/hello/{name}/{action}")
     @AutoLog(value = "sys say")
     public APIResultBody sayHello(@PathVariable("name") String name,@PathVariable("action") String action) throws Exception{
-        System.out.println(SpringContextUtil.getHttpServletRequest());
-        logger.info("input: {}",name);
+
         String result = "Hello " + name + ", here is base boot.Are you sure to "+ action;
         if("error".equals(name)){
             throw new SysException(HttpExceptionCode.SERVER_BUSY);
         }
         Thread.sleep(1000);
-        logger.info("action: {}",action);
+        logger.info("方法在执行的过程中: {}",action);
         return APIResultBody.success(result);
     }
 
